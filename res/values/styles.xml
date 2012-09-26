@@ -1,5 +1,19 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="android:Theme.Light" />
+    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar" />
+
+    <style name="main_menu">
+        <item name="android:textColor">@color/menu_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">3dip</item>
+        <item name="android:layout_marginRight">3dip</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/blue_menu_btn</item>
+    </style>
+
+    <style name="main_menu_wrapper">
+        <item name="android:layout_marginTop">3dip</item>
+    </style>
 
 </resources>

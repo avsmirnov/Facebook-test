@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.smirnov.facebook_test;
+package com.facebook.android;
 
 public final class R {
     public static final class attr {

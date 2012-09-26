@@ -3,6 +3,11 @@
     <string name="app_name">Facebook-Test</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="title_activity_main_menu">FB-Smirnov</string>
+    <string name="logout">Logout</string>
+    <string name="friends_page">Friends 2</string>
+    <string name="friends">Friends</string>
+    <string name="news">News</string>
+    <string name="login">Login</string>
 
 </resources>
