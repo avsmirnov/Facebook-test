@@ -136,7 +136,7 @@ public class FeedsList extends Activity implements OnScrollListener {
 			e.printStackTrace();
 		}
 
-		next = "" + test.getTime() / 1000;
+		next = "" + ((test.getTime()-1) / 1000);
 
 	}
 
@@ -204,8 +204,8 @@ public class FeedsList extends Activity implements OnScrollListener {
 			}
 
 			try {
-				holder.name.setText(arg0 + " - "
-						+ jsonObject.getJSONObject("from").getString("name"));
+				holder.name.setText(jsonObject.getJSONObject("from").getString(
+						"name"));
 			} catch (JSONException e) {
 				holder.name.setText("");
 			}
@@ -250,7 +250,6 @@ public class FeedsList extends Activity implements OnScrollListener {
 
 		Bundle params = new Bundle();
 		params.putString("until", next);
-
 
 		Utility.ar.request(url, params, new LoadRL());
 	}
