@@ -1,20 +1,22 @@
 package com.smirnov.facebook_test;
 
+import java.util.Iterator;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.android.DialogError;
@@ -28,10 +30,12 @@ public class MainMenu extends Activity {
 	private TextView mText;
 	private ImageView mImage;
 	public Button loginButton;
+	public ProgressDialog dialog;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		// requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main_menu);
 
@@ -53,13 +57,30 @@ public class MainMenu extends Activity {
 		super.onStart();
 
 		if (Utility.fb.isSessionValid()) {
-
-			requestUserData();
-			loginButton.setText(R.string.logout);
-
+			Utility.ar.request("me/permissions", new PermissionsRL());
 		} else {
-			loginButton.setText(R.string.login);
+			checkLoginButton();
 		}
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+
+	public void checkLoginButton() {
+
+		h.post(new Runnable() {
+			public void run() {
+				if (Utility.fb.isSessionValid()) {
+					loginButton.setText(R.string.logout);
+					requestUserData();
+				} else {
+					loginButton.setText(R.string.login);
+				}
+			}
+		});
+
 	}
 
 	@Override
@@ -88,13 +109,30 @@ public class MainMenu extends Activity {
 		} else {
 			Utility.fb.authorize(this, Utility.permissions, new LoginDL());
 		}
+	}
 
+	public void friends(View view) {
+		dialog = ProgressDialog.show(MainMenu.this, "",
+				getString(R.string.please_wait), true, true);
+
+		Bundle params = new Bundle();
+		params.putString("fields", "name, picture, location");
+		Utility.ar.request("me/friends", params, new FriendsRL());
+	}
+
+	public void feed(View view) {
+		dialog = ProgressDialog.show(MainMenu.this, "",
+				getString(R.string.please_wait), true, true);
+		
+		Bundle params = new Bundle();
+		params.putInt("limit", Utility.limit);
+
+		Utility.ar.request("me/home", params, new FeedRL());
 	}
 
 	public class LoadRL extends ProtoRequestListener {
 
 		public void onComplete(String response, Object state) {
-			Log.d(Utility.LOG_ID, response);
 			JSONObject json;
 			try {
 				json = new JSONObject(response);
@@ -113,7 +151,6 @@ public class MainMenu extends Activity {
 						h.post(new Runnable() {
 							public void run() {
 								mText.setText("Welcome " + name + "!");
-								// if
 								mImage.setImageBitmap(b);
 							}
 						});
@@ -162,7 +199,81 @@ public class MainMenu extends Activity {
 				}
 			});
 		}
+	}
 
+	public class FriendsRL extends ProtoRequestListener {
+
+		public void onComplete(String response, final Object state) {
+			dialog.dismiss();
+
+			Intent intent = new Intent(getApplicationContext(),
+					FriendsList.class);
+			intent.putExtra("API_RESPONSE", response);
+			startActivity(intent);
+
+		}
+
+		public void onFacebookError(FacebookError error) {
+			dialog.dismiss();
+			Toast.makeText(getApplicationContext(),
+					"Facebook error: " + error.getMessage(), Toast.LENGTH_SHORT)
+					.show();
+		}
+	}
+
+	public class FeedRL extends ProtoRequestListener {
+
+		public void onComplete(String response, Object state) {
+			dialog.dismiss();
+			
+			Intent intent = new Intent(getApplicationContext(), FeedsList.class);
+			intent.putExtra("API_RESPONSE", response);
+			intent.putExtra("URL", "me/home");
+			startActivity(intent);
+		}
+
+	}
+
+	public class PermissionsRL extends ProtoRequestListener {
+
+		// check permissions
+		public void onComplete(String response, Object state) {
+			JSONObject jsonArray;
+			Iterator<?> jsonKeys;
+			int lengthPermissions = Utility.permissions.length, lengthJson = 0;
+
+			try {
+				jsonArray = new JSONObject(response).getJSONArray("data")
+						.getJSONObject(0);
+				jsonKeys = jsonArray.keys();
+				String temp;
+
+				while (jsonKeys.hasNext()) {
+					temp = (String) jsonKeys.next();
+
+					if (jsonArray.getString(temp).equals("1")
+							&& Utility.keyExists(temp)) {
+						lengthJson++;
+					}
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+			if (lengthPermissions != lengthJson) {
+				h.post(new Runnable() {
+					public void run() {
+						Toast.makeText(getBaseContext(),
+								R.string.check_permission, Toast.LENGTH_SHORT)
+								.show();
+						SessionStore.clear(getBaseContext());
+						SessionStore.restore(Utility.fb, getBaseContext());
+					}
+				});
+			}
+
+			checkLoginButton();
+		}
 	}
 
 	public class AuthListener {

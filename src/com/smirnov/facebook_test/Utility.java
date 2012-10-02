@@ -23,14 +23,27 @@ import com.smirnov.facebook_test.MainMenu.AuthListener;
 
 public class Utility {
 	public static Facebook fb;
-	public static AsyncFacebookRunner ar;
-	public static String LOG_ID = "FB-Smirnov";
-	public static String userUID = null;
-	public static String[] permissions = { "publish_checkins" };
-	public static AndroidHttpClient httpclient = null;
 	public static AuthListener al;
+	public static String userUID = null;
+	public static AsyncFacebookRunner ar;
+	public static GetProfilePics model;
+	public static String LOG_ID = "FB-Smirnov";
+	public static AndroidHttpClient httpclient = null;
+	public static String[] permissions = { "publish_checkins", "read_stream", "user_subscriptions" };
 	private static final int MAX_IMAGE_DIMENSION = 720;
+	public static final String ICON_URL = "http://www.facebookmobileweb.com/hackbook/img/facebook_icon_large.png";
+	public static int limit = 20;
+	
+	public static boolean keyExists(String key) {
+		for(String i : permissions) {
+			if (i.equals(key)) {
+				return true;
+			}
+		}
 
+		return false;
+	}
+	
 	public static Bitmap getBitmap(String url) {
 		Bitmap b = null;
 		InputStream is = null;

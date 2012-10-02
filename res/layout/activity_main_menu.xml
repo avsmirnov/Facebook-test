@@ -11,17 +11,19 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/feed"
             style="@style/main_menu"
             android:layout_width="65dip"
             android:layout_height="32dip"
+            android:onClick="feed"
             android:text="@string/news" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/friends"
             style="@style/main_menu"
             android:layout_width="65dip"
             android:layout_height="32dip"
+            android:onClick="friends"
             android:text="@string/friends" />
 
         <Button
@@ -45,7 +47,7 @@
             android:layout_width="65dip"
             android:layout_height="32dip"
             android:onClick="login"
-            android:layout_marginLeft="-5dip"
+            android:layout_marginLeft="-2dip"
             android:text="@string/login" />
     </LinearLayout>
 
