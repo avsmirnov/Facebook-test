@@ -97,31 +97,30 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class id {
         public static final int LinearLayout1=0x7f050007;
-        public static final int author=0x7f050010;
+        public static final int author=0x7f05000f;
         public static final int both=0x7f050003;
-        public static final int button3=0x7f05000a;
         public static final int disabled=0x7f050000;
         public static final int feed=0x7f050008;
-        public static final int feed_item=0x7f05000e;
-        public static final int feeds_list=0x7f050012;
-        public static final int friend_item=0x7f050013;
+        public static final int feed_item=0x7f05000d;
+        public static final int feeds_list=0x7f050011;
+        public static final int friend_item=0x7f050012;
         public static final int friends=0x7f050009;
-        public static final int friends_list=0x7f050016;
+        public static final int friends_list=0x7f050015;
         public static final int gridview=0x7f050004;
-        public static final int info=0x7f050015;
-        public static final int login=0x7f05000c;
-        public static final int menu_settings=0x7f05001a;
-        public static final int name=0x7f050014;
-        public static final int news=0x7f050011;
-        public static final int profile_pic=0x7f05000f;
+        public static final int info=0x7f050014;
+        public static final int login=0x7f05000b;
+        public static final int menu_settings=0x7f050019;
+        public static final int name=0x7f050013;
+        public static final int news=0x7f050010;
+        public static final int profile_pic=0x7f05000e;
         public static final int pullDownFromTop=0x7f050001;
         public static final int pullUpFromBottom=0x7f050002;
-        public static final int pull_to_refresh_image=0x7f050017;
-        public static final int pull_to_refresh_sub_text=0x7f050019;
-        public static final int pull_to_refresh_text=0x7f050018;
+        public static final int pull_to_refresh_image=0x7f050016;
+        public static final int pull_to_refresh_sub_text=0x7f050018;
+        public static final int pull_to_refresh_text=0x7f050017;
         public static final int scrollview=0x7f050006;
-        public static final int test_pic=0x7f05000b;
-        public static final int textView=0x7f05000d;
+        public static final int test_pic=0x7f05000a;
+        public static final int textView=0x7f05000c;
         public static final int webview=0x7f050005;
     }
     public static final class layout {
@@ -139,18 +138,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int app_action=0x7f070008;
         public static final int app_desc=0x7f070007;
         public static final int app_name=0x7f070006;
-        public static final int check_permission=0x7f070015;
-        public static final int friends=0x7f07000e;
-        public static final int friends_page=0x7f07000d;
-        public static final int hello_world=0x7f070009;
-        public static final int is_end=0x7f070016;
-        public static final int login=0x7f070010;
-        public static final int logout=0x7f07000c;
-        public static final int menu_settings=0x7f07000a;
-        public static final int news=0x7f07000f;
-        public static final int no=0x7f070014;
-        public static final int please_wait=0x7f070011;
-        public static final int post_on_wall_title=0x7f070012;
+        public static final int check_permission=0x7f070014;
+        public static final int friends=0x7f07000d;
+        public static final int friends_page=0x7f07000c;
+        public static final int is_end=0x7f070015;
+        public static final int login=0x7f07000f;
+        public static final int logout=0x7f07000b;
+        public static final int menu_settings=0x7f070009;
+        public static final int news=0x7f07000e;
+        public static final int no=0x7f070013;
+        public static final int please_wait=0x7f070010;
+        public static final int post_on_wall_title=0x7f070011;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
          */
         public static final int pull_to_refresh_from_bottom_pull_label=0x7f070003;
@@ -159,8 +157,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pull_to_refresh_pull_label=0x7f070000;
         public static final int pull_to_refresh_refreshing_label=0x7f070002;
         public static final int pull_to_refresh_release_label=0x7f070001;
-        public static final int title_activity_main_menu=0x7f07000b;
-        public static final int yes=0x7f070013;
+        public static final int title_activity_main_menu=0x7f07000a;
+        public static final int yes=0x7f070012;
     }
     public static final class style {
         public static final int AppTheme=0x7f090000;
